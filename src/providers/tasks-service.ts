@@ -25,7 +25,6 @@ export class TasksService {
   }
 
   delete(task: any){
-    console.log(task);
     let sql = 'DELETE FROM tasks WHERE id=?';
     return this.db.executeSql(sql, [task.id]);
   }
@@ -46,10 +45,7 @@ export class TasksService {
     return this.db.openDatabase({
       name: 'data.db',
       location: 'default' // the location field is required
-    })
-    .then(()=>{
-      this.createTable();
-    })
+    });
   }
 
   update(task: any){
