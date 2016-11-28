@@ -51,7 +51,7 @@ export class HomePage {
   openAlertNewTask(){
     let alert = this.alertCtrl.create({
       title: 'Crear tarea',
-      message: 'escribe le nombre de la tarea',
+      message: 'escribe el nombre de la tarea',
       inputs: [
         {
           name: 'title',
