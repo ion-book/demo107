@@ -1,14 +1,30 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Tasks</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only (click)="openAlertNewTask()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content>
+   <ion-list>
+     <ion-item *ngIf="tasks.length == 0"> 
+       Empty
+     </ion-item>
+    <ion-item-sliding #sliding *ngFor="let task of tasks; let i = index">
+      <ion-item >
+        <ion-label>{{ task.title }}</ion-label>
+        <ion-checkbox (ionChange)="updateTask( task, i )" [checked]="task.completed"></ion-checkbox>
+      </ion-item>
+      <ion-item-options side="right" icon-left>
+        <button ion-button color="danger" (click)="deleteTask(task, i)">
+          <ion-icon name="trash"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>
