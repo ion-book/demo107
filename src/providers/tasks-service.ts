@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
-import { SQLite } from 'ionic-native';
+import { SQLiteObject } from '@ionic-native/sqlite';
 
 @Injectable()
 export class TasksService {
 
   // public properties
 
-  db: SQLite = null;
+  db: SQLiteObject = null;
 
-  constructor() {
-    this.db = new SQLite();
-  }
+  constructor() {}
 
   // public methods
 
@@ -33,24 +31,25 @@ export class TasksService {
     let sql = 'SELECT * FROM tasks';
     return this.db.executeSql(sql, [])
     .then(response => {
+      console.log(response);
       let tasks = [];
       for (let index = 0; index < response.rows.length; index++) {
         tasks.push( response.rows.item(index) );
       }
       return Promise.resolve( tasks );
     })
-  }
-
-  openDatabase(){
-    return this.db.openDatabase({
-      name: 'data.db',
-      location: 'default' // the location field is required
-    });
+    .catch(error => Promise.reject(error));
   }
 
   update(task: any){
     let sql = 'UPDATE tasks SET title=?, completed=? WHERE id=?';
     return this.db.executeSql(sql, [task.title, task.completed, task.id]);
+  }
+
+  setDatabase(db: SQLiteObject){
+    if(this.db === null){
+      this.db = db;
+    }
   }
 
 }
