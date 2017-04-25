@@ -47,6 +47,9 @@ export class HomePage {
       console.log(tasks);
       this.tasks = tasks;
     })
+    .catch( error => {
+      console.error( error );
+    })
   }
 
   openAlertNewTask(){

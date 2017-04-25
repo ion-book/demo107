@@ -6,12 +6,11 @@ import { SQLite } from '@ionic-native/sqlite';
 
 import { TasksService } from '../providers/tasks-service';
 
-
 @Component({
   template: `<ion-nav [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
-  rootPage: any = null;
+  rootPage: string = null;
 
   constructor(
     public platform: Platform,
@@ -22,11 +21,11 @@ export class MyApp {
   ) {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
-      this.makeDatabase();
+      this.createDatabase();
     });
   }
 
-  private makeDatabase(){
+  private createDatabase(){
     this.sqlite.create({
       name: 'data.db',
       location: 'default' // the location field is required

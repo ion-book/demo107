@@ -12,6 +12,12 @@ export class TasksService {
 
   // public methods
 
+  setDatabase(db: SQLiteObject){
+    if(this.db === null){
+      this.db = db;
+    }
+  }
+
   create(task: any){
     let sql = 'INSERT INTO tasks(title, completed) VALUES(?,?)';
     return this.db.executeSql(sql, [task.title, task.completed]);
@@ -31,7 +37,6 @@ export class TasksService {
     let sql = 'SELECT * FROM tasks';
     return this.db.executeSql(sql, [])
     .then(response => {
-      console.log(response);
       let tasks = [];
       for (let index = 0; index < response.rows.length; index++) {
         tasks.push( response.rows.item(index) );
@@ -44,12 +49,6 @@ export class TasksService {
   update(task: any){
     let sql = 'UPDATE tasks SET title=?, completed=? WHERE id=?';
     return this.db.executeSql(sql, [task.title, task.completed, task.id]);
-  }
-
-  setDatabase(db: SQLiteObject){
-    if(this.db === null){
-      this.db = db;
-    }
   }
 
 }

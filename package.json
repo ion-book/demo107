@@ -35,12 +35,12 @@
   },
   "cordovaPlugins": [
     "cordova-plugin-whitelist",
-    "cordova-plugin-console",
     "cordova-plugin-statusbar",
-    "cordova-plugin-device",
     "cordova-plugin-splashscreen",
     "ionic-plugin-keyboard",
-    "cordova-sqlite-storage"
+    "cordova-sqlite-storage",
+    "cordova-plugin-device",
+    "cordova-plugin-console"
   ],
   "cordovaPlatforms": [
     {
